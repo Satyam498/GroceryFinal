@@ -1,0 +1,51 @@
+<body>
+  <div class="input-group mb-3 inputgroup"  style="width:400px">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><span class="material-icons">
+          search
+          </span></span>  
+    </div>
+    <input type="text" class="form-control" placeholder="Search by ...." [(ngModel)]="searchTerm">
+    <select id="Select1" [(ngModel)]="selected">
+        <option>Product Id</option>
+        <option>Product Name</option>
+        <option>Category</option>
+       
+      </select>  
+</div>
+ 
+  
+  <table class="table .table-striped   table-head table-sm"> 
+    <thead  class="thead-dark"> 
+        <th>Product ID</th> 
+        <th>Product Name</th>
+        <th>Category</th>  
+        <th>Price</th> 
+        <th>Availability</th>
+        <th>Quantity</th>  
+        <th>Actions</th>
+     
+       
+       
+    </thead>
+    <tbody *ngFor=" let a of prodData | productFilter:searchTerm:selected">
+        <tr>
+            <td>{{a.productId}}</td>
+            <td>{{a.productName}}</td>
+            <td>{{a.productCategory}}</td>
+            <td>{{a.productPrice}}</td>  
+            <td>{{a.availability}}</td> 
+            <td>{{a.quantity}}</td>           
+           
+          <button  (click)='updateButtonClicked(a)' type="button" class="btn btn-success">Update</button>
+          &nbsp;&nbsp;
+          <button (click)='delete(a)'  type="button" class="btn btn-danger">Delete</button>
+
+         </tr> 
+    </tbody>
+   </table>
+   
+   
+   
+   
+   </body>

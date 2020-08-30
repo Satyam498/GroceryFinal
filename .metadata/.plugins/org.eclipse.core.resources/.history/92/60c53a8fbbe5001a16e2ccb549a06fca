@@ -1,0 +1,42 @@
+package com.cg.service;
+
+import java.util.List;
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.model.Login;
+import com.cg.repository.LoginRepository;
+
+/**
+ * @author ${Satyam kumar}
+ *
+ *
+ *
+ *@Service
+ *Service Components are the class file which contains @Service annotation.
+ * These class files are used to write business logic in a different layer, separated from @RestController class file
+ *
+ *
+ *
+ */
+@Service(value = "service")
+public class LoginServiceImpl implements LoginService {
+
+	@Autowired
+	private LoginRepository repos;
+
+	@Override
+	public Login addCredential(Login login) {
+		return repos.save(login);
+	}
+
+	@Override
+	public List<Login> getAll() {
+		return repos.findAll();
+	}
+
+}

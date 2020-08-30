@@ -1,0 +1,57 @@
+<body>
+
+
+  <div class="bg-cover"></div>
+  <div class="container">
+    <div class="header">
+    </div>
+    <div class="middle" >
+      <div class="avatar"><i class="material-icons" style="font-size: 100px; color: rgba(255,255,255,0.7)">&#xe853;</i></div>
+      <h4 class="name">{{profile.fname}} {{profile.lname}} </h4>
+    </div>
+    <div class="footer">
+     <a class="btn-follow">{{profile.userId}}</a><br/>
+  
+     <div class="row">
+      <div class="col">
+        Mobile:
+      </div>
+      <div class="col">
+        {{profile.mobile}} 
+       
+      </div>
+     </div>
+     
+     <div class="row">
+      <div class="col">
+        Address:
+      </div>
+      <div class="col">
+        {{profile.address}}
+      </div>
+     </div>
+     
+     <div class="row">
+      <div class="col">
+        Email:
+      </div>
+      <div class="col">
+        {{profile.email}}
+      </div>
+     </div>
+     <div>
+      <button  (click)='updateButtonClicked(profile)' type="button" class="btn btn-success">Edit</button>
+     </div>
+    </div>
+  </div>
+  
+
+  </body>
+     
+  
+  
+  
+   
+
+
+

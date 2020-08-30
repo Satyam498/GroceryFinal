@@ -1,0 +1,89 @@
+
+<body>
+
+  <div class="card" style="width: 75rem;">
+      <div class="card-header">
+       <strong> ADD PRODUCT </strong> 
+      </div>
+      <div class="card-body">
+        
+        <form #addForm="ngForm" > 
+          
+          <div class="form-group">
+            <label>Product ID</label>
+            <input type="text" pattern="[1-9][0-9]+"  [(ngModel)]='product.productId' #productId="ngModel" [ngModelOptions]="{standalone: true}" placeholder="Enter product Id" class="form-control .form-control-sm" id="productId">
+            <span *ngIf='!productId.valid && productId.dirty && productId.touched'>
+              <p style="color: #f40552" >Enter a valid product Id</p>
+            </span>
+            <span *ngIf='!productId.valid && productId.touched && productId.pristine' >
+                <p style="color: #f40552" >This is a required field</p>
+            </span>
+         
+          </div>
+      <div>
+            <label>Product Name</label>
+            <input type="text"  [(ngModel)]='product.productName'  #productName="ngModel" [ngModelOptions]="{standalone: true}" placeholder="Enter Name" class="form-control .form-control-sm" id="name">
+          
+            <span *ngIf= '!productName.valid && !productName.untouched && productName.pristine'>
+              <p style="color: red">Product Name cannot be empty</p>
+            </span>
+          </div>    
+          
+          <div class="form-group">
+            <label>Category</label>
+            <select type="text" [(ngModel)]='product.productCategory'  [ngModelOptions]="{standalone: true}"   placeholder="Enter Category" class="form-control" id="productCategory">
+              <option>Bakery</option>
+              <option>Dairy</option>
+              <option>Vegetables</option>
+              <option>Bevarages</option>
+              <option>Candy</option>
+            </select>
+                    
+        </div>
+ 
+         
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number"  [(ngModel)]='product.productPrice'  [ngModelOptions]="{standalone: true}"   placeholder="Enter Price" class="form-control .form-control-sm" id="productPrice">
+          </div>
+          <div>
+            <label>Product Image Name</label>
+            <input type="text" [(ngModel)]='product.productImage'  [ngModelOptions]="{standalone: true}" placeholder="Enter Image Name" class="form-control .form-control-sm" id="Imagename">
+          </div>      
+          
+          <div class="form-group">
+            <label>Availability</label>
+            <select type="text" [(ngModel)]='product.availability' [ngModelOptions]="{standalone: true}" #availability="ngModel" required placeholder="Enter availability Status" class="form-control" id="availability">
+              <option>Yes</option>
+              <option>No</option>
+            </select> 
+           </div>
+        
+            <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" [(ngModel)]='product.quantity'  [ngModelOptions]="{standalone: true}" placeholder="Enter Quantity" class="form-control .form-control-sm" id="quantity">
+          
+          </div>
+           <button (click)="add()" class="btn btn-primary btn-block">ADD</button> 
+          
+        </form>
+      </div>
+    </div> 
+   
+  
+    
+  
+  
+  
+  
+  
+  
+    
+    
+  </body>
+    
+    
+    
+    
+    
+    

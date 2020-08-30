@@ -1,0 +1,39 @@
+package com.cg.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.springframework.stereotype.Repository;
+
+import com.cg.model.Cart;
+
+@Repository(value = "orderDao")
+public class OrderDaoImpl implements OrderDao {
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	
+	
+	@Override
+	public List<Cart> viewcartByCustomerId(int customerId) {
+		
+		String jpql = "from Cart where user_Id =: customerId";
+			
+		
+		
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("customerId", customerId);
+		
+		List<Cart> ol = query.getResultList();
+		
+		return ol;
+	}
+	
+	
+	
+
+}

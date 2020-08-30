@@ -1,0 +1,264 @@
+package com.cg.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
+import com.cg.model.Cart;
+import com.cg.model.Product;
+import com.cg.model.User;
+
+
+
+@Repository(value = "cartDao")
+public class CartDaoImpl implements CartDao {
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	
+	
+	
+	
+	@Override
+	public boolean addCart(Cart cart){
+		// TODO Auto-generated method stub
+		
+		if(cart!=null) {
+			entityManager.persist(cart);
+			
+			return true;
+	
+		}else {
+			System.out.println("Error while adding to cart");
+		}
+	
+		return false;
+	}
+
+	
+
+	
+	
+	
+	
+	@Override
+	public boolean deleteCartByCustomerId(int customerId) {
+		
+
+		
+		String jpql = "delete from CartBean where customerId =: customerId";
+
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("customerId", customerId);
+
+		boolean isDeleted = false;
+
+		try {
+
+			 query.executeUpdate();
+
+			isDeleted = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+		return isDeleted;
+		
+	}
+
+
+
+
+	@Override
+	public double bill(int cartId) throws CartBeanException {
+		// TODO Auto-generated method stub
+		double bill = 0;
+		System.out.println("cartId    :"+cartId);
+		
+			 
+//			String jpql = "select sum(productPrice) from CartBean where cartId =: cartId";
+			Query query = entityManager.createQuery(QueryUtil.VIEW_BILL_BY_CART_ID);
+			System.out.println(query);
+			query.setParameter("customerId", cartId);
+			bill = (double) query.getSingleResult();
+		if(bill!=0) {
+			myLogger.info("Bill generated successfully"+bill+" of cartId:"+cartId);
+		}else {
+			myLogger.error(ErrorMessageUtil.BILL_ERROR_CART+bill+" of cartId:"+cartId);
+
+		}
+			return bill;
+	
+		
+		
+	}
+	
+
+
+
+
+	
+	@Override
+	public boolean addCartByProductIdCustomerId(int customerId, int productId,int quantity){
+		
+		double productPrice=0;
+		String productName = null;
+		boolean isadd=false;
+		
+		try{
+		String jpql="from CustomerBean where customerId=:customerId";
+		Query query=entityManager.createQuery(jpql);
+		query.setParameter("customerId", customerId);
+		User  user = (User)query.getSingleResult();
+		
+		
+		String jpql1="from ProductBean where productId=:productId";
+		Query query1=entityManager.createQuery(jpql1);
+		query1.setParameter("productId",productId);
+		
+		Product product= (Product) query1.getSingleResult();
+		productName = product.getProductName();
+		productPrice = product.getProductPrice();
+		
+		Cart cartBean = new Cart();
+		cartBean.setProduct(product);
+		cartBean.setUser(user);
+		
+		
+		cartBean.setProductName(productName);
+		cartBean.setQuantity(quantity);
+		
+		entityManager.persist(cartBean);
+		System.out.println("Product Added in your cart");
+		return true;
+		}catch(Exception e) {
+			System.out.println("Unable to add");
+		}
+		
+		return false;
+		
+		
+		
+	}
+
+
+
+	@Override
+	public double calculateBill(int userId) throws CartBeanException {
+		
+		double bill = 0;
+		System.out.println("userId    :"+userId);
+		
+			 
+
+			Query query = entityManager.createQuery("select sum(productPrice)*quantity from CartBean where customerId =: customerId");
+			System.out.println(query);
+			query.setParameter("customerId", userId);
+			System.out.println("Bill    "+bill);
+			bill = (double) query.getSingleResult();
+		if(bill!=0) {
+			System.out.println("Bill  generated successfully");
+		}else {
+			System.out.println("Bill not generated");
+		}
+			return bill;
+	}
+
+
+
+	@Override
+	public List<Cart> showCartByUserId(int userId) {
+		
+		
+		List<Cart> info= null;
+
+			String jpql="from CartBean where customerId =: userId";
+			Query query=entityManager.createQuery(jpql);
+			query.setParameter("userId", userId);
+			info=query.getResultList();
+			
+		
+
+		return info;
+	}
+
+	
+	
+	@Override
+	public boolean addToCart(int userId, int productId) {
+
+		double price=0;
+		String medicineName = null;
+		String productName = null;
+	//	EntityManager entityManager=emf.createEntityManager();
+		//EntityTransaction transaction=null;
+		boolean isadd=false;
+
+
+		try {
+			//transaction=entityManager.getTransaction();
+			
+			String jpql="from CustomerBean where customerId=:userId";
+			Query query=entityManager.createQuery(jpql);
+			query.setParameter("userId", userId);
+			System.out.println("User query done");
+			
+
+			String jpql1="from ProductBean where productId=:productId";
+			Query query1=entityManager.createQuery(jpql1);
+			query1.setParameter("productId",productId);
+			ProductBean productBean= (ProductBean) query1.getSingleResult();
+			productName = productBean.getProductName();
+			price=productBean.getProductPrice();
+
+			CartBean cartBean=new CartBean();
+			cartBean.setCustomerId(userId);
+			cartBean.setProductId(productId);
+			cartBean.setProductPrice(price);
+			cartBean.setProductName(productName);
+
+
+
+//			transaction.begin();
+			entityManager.persist(cartBean);
+			System.out.println("Product Added in your cart");
+//			transaction.commit();
+			isadd=true;
+		}catch(Exception e) {
+			System.out.println("Unable to add");
+		}
+
+		return isadd;
+	}
+	
+	
+	//added afterwards
+	@Override
+	public List<Cart> showCart(int userId) {
+		List<Cart> info= null;
+//		EntityManager entityManager=null;
+		try {
+			//entityManager=emf.createEntityManager();
+
+			String jpql="from CartBean where customerId =: userId";
+			Query query=entityManager.createQuery(jpql);
+			query.setParameter("userId", userId);
+			info=query.getResultList();
+			entityManager.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return info;
+	}
+
+
+}

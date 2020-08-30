@@ -1,0 +1,27 @@
+package com.cg.dao;
+
+import java.util.List;
+
+import com.cg.model.Cart;
+
+public interface CartDao {
+	boolean addCart(Cart cart) ;
+	
+	boolean addCartByProductIdCustomerId(int customerId,int productId,int quantity) ;
+
+
+//	 List<CartBean> showCart(int cartId);
+
+	
+	 
+	 boolean deleteCartByCustomerId(int customerId) ;
+	
+	 
+	 
+	 double calculateBill(int userId);
+	 
+	 public List<Cart> showCartByUserId(int userId);
+	 
+	 
+	 public List<Cart> showCart(int userId) ;
+}

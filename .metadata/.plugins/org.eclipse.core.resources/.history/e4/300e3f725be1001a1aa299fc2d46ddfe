@@ -1,0 +1,74 @@
+package com.cg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.dao.CartDao;
+import com.cg.model.Cart;
+import com.cg.repository.CartRepository;
+
+
+@Service(value = "cartService")
+public class CartServiceImpl implements CartService {
+
+	@Autowired
+	private  CartDao cartDao;
+	
+	@Autowired
+	private  CartRepository cartRepository;
+	
+	
+	
+	
+	@Override
+	public boolean addCart(Cart cart) {
+		int CartId = cart.getCartId();
+		Product product  = productService.searchByProductId(productId);
+		
+		int customerId = cart.getCustomerId();
+		Customer  customer = customerService.searchByCustomerId(customerId);
+		
+	
+		cart.setCustomerBean(customer);
+		cart.setProductBean(product);
+		cart = cartRepository.save(cart);
+		
+		if(cart!=null) {
+			return true;
+		}
+		return false;	
+		
+	}
+
+	@Override
+	public boolean addCartByProductIdCustomerId(int customerId, int productId, int quantity) {
+		// TODO Auto-generated method stub
+		return cartDao.addCartByProductIdCustomerId(customerId, productId,quantity);
+	}
+
+	@Override
+	public boolean deleteCartByCustomerId(int customerId) {
+		return cartDao.deleteCartByCustomerId(customerId);
+	}
+
+	@Override
+	public double calculateBill(int userId) {
+		return cartDao.calculateBill(userId);
+	}
+
+	@Override
+	public List<Cart> showCartByUserId(int userId) {
+		return cartDao.showCartByUserId(userId);
+	}
+
+	@Override
+	public List<Cart> showCart(int userId) {
+		return cartDao.showCart(userId);
+		
+	}
+
+	
+}

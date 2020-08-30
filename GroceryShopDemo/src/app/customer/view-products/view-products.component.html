@@ -1,0 +1,55 @@
+<body>
+
+
+  
+    <div class="input-group mb-3 inputgroup"  style="width:400px">
+      <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><span class="material-icons">
+            search
+            </span></span>  
+      </div>
+      <input type="text" class="form-control" placeholder="Search by ...." [(ngModel)]="searchTerm">
+      <select id="Select1" [(ngModel)]="selected">
+          <option>Product Name</option>
+          <option>Category</option>
+         
+        </select>  
+  </div>
+
+  
+  
+
+     
+      <div class="row">
+         <div class="top_dishes_box" *ngFor="let product of proddata | productFilter:searchTerm:selected" >
+        <div class="col-sm-6">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/assets/images/{{product.productImage}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Product</h5>
+          <p class="card-text">Product Name : {{product.productName}}</p>
+          <p class="card-text">Product Available : {{product.quantity}}</p>
+          <p class="card-text">Price : Rs.{{product.productPrice}}</p>
+        
+          <form [formGroup]="qtyForm" (ngSubmit)="addtoCart(product)" > 
+   
+      
+           <input formControlName="productQuantity" class="form-control " type="number" name="quantity"   placeholder="quantity" min="1">
+       
+           <button class="btn btn-primary btn-block">Add to Cart</button>    
+           
+           
+                     </form>
+                    
+        </div>
+      </div>
+      </div>
+     </div>
+  </div>
+  
+     </body>
+
+
+   
+  
+  

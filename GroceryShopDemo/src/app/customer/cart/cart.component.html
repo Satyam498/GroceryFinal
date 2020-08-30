@@ -1,0 +1,16 @@
+
+<div class="card" style="width: 35rem; margin-left: 375px; margin-top: 50px;">
+  <h5 class="card-header">My Cart</h5>
+  <div class="card-body">
+    <h5 class="card-title">Products</h5>
+    <ul class="list-group" *ngFor=" let p of cartdata">
+      <li class="list-group-item">{{p.productName}}</li>
+      <li class="list-group-item">{{p.productPrice}}</li>
+      <li class="list-group-item">{{p.quantity}}</li>
+     
+    </ul>
+   
+    <a href="#" class="btn btn-primary btn-block">Checkout</a>
+  </div>
+</div>
+

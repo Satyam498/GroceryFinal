@@ -1,0 +1,23 @@
+package com.cg.service;
+
+import java.util.List;
+
+
+import com.cg.model.Cart;
+
+public interface CartService {
+	
+	boolean addCart(Cart cart);
+	
+	boolean addCartByProductIdCustomerId(int customerId,int productId,int quantity) ;
+	
+	 boolean deleteCartByCustomerId(int customerId) ;
+	
+	 double calculateBill(int userId);
+	 
+	 public List<Cart> showCartByUserId(int userId);
+	
+	 public List<Cart> showCart(int userId) ;
+	
+	
+}

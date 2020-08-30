@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserDetailsApplicationTests" project="CustomerDetails" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cg.obs.UserDetailsApplicationTests" time="0.081" displayname="UserDetailsApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.cg.obs.UserDetailsApplicationTests]">
+    <testcase name="addUserTest" classname="com.cg.obs.UserDetailsApplicationTests" time="0.054" displayname="addUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.cg.obs.UserDetailsApplicationTests]/[method:addUserTest()]"/>
+    <testcase name="retrieveAllUserstest" classname="com.cg.obs.UserDetailsApplicationTests" time="0.006" displayname="retrieveAllUserstest()" uniqueid="[engine:junit-jupiter]/[class:com.cg.obs.UserDetailsApplicationTests]/[method:retrieveAllUserstest()]"/>
+    <testcase name="deleteUserTest" classname="com.cg.obs.UserDetailsApplicationTests" time="0.021" displayname="deleteUserTest()" uniqueid="[engine:junit-jupiter]/[class:com.cg.obs.UserDetailsApplicationTests]/[method:deleteUserTest()]"/>
+  </testsuite>
+</testrun>

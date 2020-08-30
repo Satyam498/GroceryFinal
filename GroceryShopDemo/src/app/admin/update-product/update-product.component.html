@@ -1,0 +1,80 @@
+
+<body>
+
+  <div class="card" style="width: 75rem;">
+      <div class="card-header">
+       <strong> UPDATE PRODUCT  </strong> 
+      </div>
+      <div class="card-body">
+        
+        <form #updateForm="ngForm" > 
+          
+          <div class="form-group">
+            <label>Product ID</label>
+            <input type="number"  [(ngModel)]='product.productId' [ngModelOptions]="{standalone: true}" placeholder="Enter product Id" class="form-control .form-control-sm" id="productId">
+                   
+          </div>
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" [(ngModel)]='product.productName'  [ngModelOptions]="{standalone: true}" placeholder="Enter Name" class="form-control .form-control-sm" id="name">
+          </div>
+                 
+          
+          <div class="form-group">
+            <label>Category</label>
+            <select type="text" [(ngModel)]='product.productCategory'  [ngModelOptions]="{standalone: true}"   placeholder="Enter Category" class="form-control" id="productCategory">
+              <option>Bakery</option>
+              <option>Dairy</option>
+              <option>Vegetables</option>
+              <option>Bevarages</option>
+              <option>Candy</option>
+            </select>
+                    
+        </div>
+ 
+         
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number" [(ngModel)]='product.productPrice'  [ngModelOptions]="{standalone: true}" placeholder="Enter Price" class="form-control .form-control-sm" id="salary">
+           
+          </div>
+          
+      
+          <div class="form-group">
+            <label>Availability</label>
+            <select type="text" [(ngModel)]='product.availability' [ngModelOptions]="{standalone: true}" #availability="ngModel" required placeholder="Enter availability Status" class="form-control" id="availability">
+              <option>Yes</option>
+              <option>No</option>
+            </select> 
+           </div>
+        
+            <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" [(ngModel)]='product.quantity'  [ngModelOptions]="{standalone: true}" placeholder="Enter Quantity" class="form-control .form-control-sm" id="quantity">
+          
+          </div>
+    
+  
+           <button (click)="update(product)"   class="btn btn-primary btn-block">Update</button> 
+        
+        </form>
+      </div>
+    </div> 
+   
+  
+    
+  
+  
+  
+  
+  
+  
+    
+    
+  </body>
+    
+    
+    
+    
+    
+    
